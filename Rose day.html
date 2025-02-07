@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day - My Eternal Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/confetti.browser.min.js"></script>
+    <style>
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .heart {
+            animation: heartbeat 1.5s infinite;
+            color: #ff3366;
+        }
+        .rose-petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+        .love-letter {
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        .love-letter:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-pink-100 to-red-100 min-h-screen">
+    <!-- Audio Embed -->
+    <audio id="romantic-audio" autoplay loop>
+        <source src="https://files.catbox.moe/6aoyoo.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="particles"></div>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="text-center mb-8">
+            <div class="heart text-6xl mb-4">❤️</div>
+            <h1 class="text-4xl md:text-6xl font-bold text-rose-600 mb-4 animate-pulse">
+                Happy Rose Day, My Love! 🌹
+            </h1>
+            <p class="text-xl text-pink-600">Every Petal Whispers Your Name</p>
+        </div>
+
+        <!-- Rose Image Section -->
+        <div class="max-w-2xl mx-auto mb-8 relative" onclick="startPetals()">
+            <img src="https://files.catbox.moe/96um7e.png" 
+                 class="w-full h-64 object-contain cursor-pointer hover:scale-105 transition-transform"
+                 alt="Beautiful Rose">
+            <div id="petals"></div>
+        </div>
+
+        <!-- Love Letter in Bengali -->
+        <div class="bg-white rounded-lg shadow-xl p-6 mb-8 love-letter">
+            <h2 class="text-2xl font-bold text-rose-700 mb-4">I labbu🍋</h2>
+            <p class="text-gray-700 leading-relaxed">
+               আমার প্রিয়তমা,
+
+এই গোলাপের প্রতিটি পাপড়িতে লুকিয়ে আছে আমার ভালোবাসার একেকটি গল্প—তোমার মিষ্টি হাসি, তোমার কোমল হৃদয়, তোমার অপরিসীম শক্তি, আর তোমার অসাধারণ সত্তা।
+
+তুমি আমার জীবনকে এমন রঙে রাঙিয়েছ, যা আগে কখনো কল্পনাও করিনি। তোমার ছোঁয়ায় প্রতিটি দিন হয়ে ওঠে আরও সুন্দর, আরও অর্থবহ।
+
+তুমি শুধু আমার ভালোবাসা নও, তুমি আমার আশ্রয়, আমার আনন্দ, আমার স্বপ্নের পরিপূর্ণতা।
+
+তোমার জন্য হৃদয়ের অন্তঃস্থল থেকে জানাই ভালোবাসা, আজ, আগামীকাল, এবং অনন্তকাল। 🌹❤️
+            </p>
+        </div>
+
+
+        <!-- Love Meter -->
+        <div class="bg-white p-6 rounded-lg shadow-md text-center mb-8">
+            <h3 class="text-2xl font-bold text-rose-600 mb-4">আমাদের ভালোবাসার মিটার</h3>
+            <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                <div id="love-progress" class="bg-rose-600 h-4 rounded-full w-0 transition-all duration-1000"></div>
+            </div>
+            <button onclick="fillLoveMeter()" 
+                    class="bg-rose-600 text-white px-6 py-2 rounded-full hover:bg-rose-700 transition-colors">
+                আমাদের ভালোবাসা মাপো!
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-pink-600">
+            <p>তোমার জন্য তৈরি প্রিয় 💖</p>
+        </footer>
+    </div>
+
+    <script>
+        // Confetti effect
+        const confetti = new Confetti('particles');
+        confetti.setCount(300);
+        confetti.setSize(1.5);
+        confetti.setPower(25);
+        confetti.setFade(false);
+        confetti.start();
+
+        // Rose petals animation
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'rose-petal';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('petals').appendChild(petal);
+            
+            setTimeout(() => petal.remove(), 5000);
+        }
+
+        function startPetals() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(createPetal, Math.random() * 1000);
+            }
+        }
+
+        // Love meter animation
+        function fillLoveMeter() {
+            const progress = document.getElementById('love-progress');
+            progress.style.width = '100%';
+        }
+
+        // Initial petals on load
+        window.onload = function() {
+            startPetals();
+            // Play audio automatically
+            const audio = document.getElementById('romantic-audio');
+            audio.play().catch(() => {
+                console.log("Audio playback failed. User interaction might be required.");
+            });
+        }
+    </script>
+</body>
+</html>
